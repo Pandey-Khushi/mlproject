@@ -1,1 +1,201 @@
-<h1>welcome my Home page</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Math Score Predictor</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      width: 400px;
+      text-align: center;
+      animation: fadeIn 1.2s ease-in-out;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(255,255,255,0.3);
+    }
+
+    .form-group {
+      margin: 15px 0;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      outline: none;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      color: #fff;
+      font-size: 14px;
+      transition: all 0.3s ease-in-out;
+      appearance: none;
+      cursor: pointer;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    select:focus, input:focus {
+      border: 1px solid rgba(255,255,255,0.6);
+      box-shadow: 0 0 10px rgba(255,255,255,0.5);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    option {
+      background: rgba(30, 41, 59, 0.9);
+      color: #fff;
+      padding: 10px;
+    }
+
+    option:hover {
+      background: rgba(71, 85, 105, 0.9);
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #ff512f, #dd2476);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(221,36,118,0.4);
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(221,36,118,0.6);
+    }
+
+    .output-box {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      font-size: 16px;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.2);
+      text-shadow: 0 0 6px rgba(255,255,255,0.3);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Math Score Predictor</h2>
+    <form id="predictForm">
+      
+      <div class="form-group">
+        <label>Gender</label>
+        <select id="gender">
+          <option value="female">Female</option>
+          <option value="male">Male</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Race/Ethnicity</label>
+        <select id="race">
+          <option value="group A">Group A</option>
+          <option value="group B">Group B</option>
+          <option value="group C">Group C</option>
+          <option value="group D">Group D</option>
+          <option value="group E">Group E</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Parental Education</label>
+        <select id="education">
+          <option value="some high school">Some High School</option>
+          <option value="high school">High School</option>
+          <option value="some college">Some College</option>
+          <option value="associate's degree">Associate's Degree</option>
+          <option value="bachelor's degree">Bachelor's Degree</option>
+          <option value="master's degree">Master's Degree</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Lunch</label>
+        <select id="lunch">
+          <option value="standard">Standard</option>
+          <option value="free/reduced">Free/Reduced</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Test Preparation Course</label>
+        <select id="prep">
+          <option value="none">None</option>
+          <option value="completed">Completed</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Reading Score</label>
+        <input type="number" id="reading" placeholder="Enter reading score">
+      </div>
+
+      <div class="form-group">
+        <label>Writing Score</label>
+        <input type="number" id="writing" placeholder="Enter writing score">
+      </div>
+
+      <button type="button" onclick="predictScore()">Predict Math Score</button>
+    </form>
+
+    <div class="output-box" id="output">
+      Predicted Math Score: --
+    </div>
+  </div>
+
+  <script>
+    function predictScore() {
+      // Dummy prediction (replace later with ML model API)
+      let reading = parseInt(document.getElementById('reading').value) || 0;
+      let writing = parseInt(document.getElementById('writing').value) || 0;
+      let predicted = Math.round((reading + writing) / 2);
+
+      document.getElementById('output').innerText = "Predicted Math Score: " + predicted;
+    }
+  </script>
+</body>
+</html>
